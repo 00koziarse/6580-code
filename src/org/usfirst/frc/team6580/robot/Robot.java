@@ -1,9 +1,11 @@
 package org.usfirst.frc.team6580.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -15,9 +17,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	RobotDrive myRobot = new RobotDrive(0, 1, 2, 3);
-	Joystick leftStick = new Joystick(0);
+	XboxController myController = new XboxController(0);
 	Timer timer = new Timer();
-	Joystick rightStick = new Joystick(1);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -62,7 +63,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		myRobot.tankDrive(leftStick, rightStick);
+		double left;
+		double right;
+		left = myController.getY(Hand.kLeft);
+		right = myController.getY(Hand.kRight);
+		myRobot.tankDrive(left, right);
+		
 	}
 
 	/**
