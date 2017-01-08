@@ -65,9 +65,17 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		double left;
 		double right;
+		boolean speedLimit;
 		left = myController.getY(Hand.kLeft);
 		right = myController.getY(Hand.kRight);
+		speedLimit = myController.getBumper(Hand.kRight);
+		if (speedLimit == true) {
+			left = left*0.7;
+			right = right*0.7;
+		}
 		myRobot.tankDrive(left, right);
+		
+		
 		
 	}
 
